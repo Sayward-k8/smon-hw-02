@@ -4,13 +4,13 @@
 Установите Zabbix Server с веб-интерфейсом.
 
 **Процесс выполнения**
-  Выполняя ДЗ, сверяйтесь с процессом отражённым в записи лекции.
-  Установите PostgreSQL. Для установки достаточна та версия, что есть в системном репозитороии Debian 11.
-  Пользуясь конфигуратором команд с официального сайта, составьте набор команд для установки последней версии Zabbix с поддержкой PostgreSQL и Apache.
-  Выполните все необходимые команды для установки Zabbix Server и Zabbix Web Server.
-  Требования к результатам
-  Прикрепите в файл README.md скриншот авторизации в админке.
-  Приложите в файл README.md текст использованных команд в GitHub.
+  1. Выполняя ДЗ, сверяйтесь с процессом отражённым в записи лекции.
+  2. Установите PostgreSQL. Для установки достаточна та версия, что есть в системном репозитороии Debian 11.
+  3. Пользуясь конфигуратором команд с официального сайта, составьте набор команд для установки последней версии Zabbix с поддержкой PostgreSQL и Apache.
+  4. Выполните все необходимые команды для установки Zabbix Server и Zabbix Web Server.
+  5. Требования к результатам
+  6. Прикрепите в файл README.md скриншот авторизации в админке.
+  7. Приложите в файл README.md текст использованных команд в GitHub.
 
 ### Решение 1
 <details> 
@@ -20,20 +20,20 @@
 ![alt text](https://github.com/Sayward-k8/smon-hw-02/blob/main/image/1.3.png)
 
 **Список всех использованных команд:**
-apt update
-apt install postgresql
-wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_latest_6.0+debian11_all.deb
-dpkg -i zabbix-release_latest_6.0+debian11_all.deb
-ls -la /etc/apt/sources.list.d/
-apt update
-apt install zabbix-server-pgsql zabbix-frontend-php php7.4-pgsql zabbix-apache-conf zabbix-sql-scripts zabbix-agent
-systemctl status zabbix-server
-su - postgres -c 'psql --command "CREATE USER zabbix WITH PASSWORD '\'123456789\'';"'
-su - postgres -c 'psql --command "CREATE DATABASE zabbix OWNER zabbix;"'
-zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
-nano /etc/zabbix/zabbix_server.conf
-systemctl restart zabbix-server zabbix-agent apache2
-systemctl enable zabbix-server zabbix-agent apache2
+- apt update
+- apt install postgresql
+- wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_latest_6.0+debian11_all.deb
+- dpkg -i zabbix-release_latest_6.0+debian11_all.deb
+- ls -la /etc/apt/sources.list.d/
+- apt update
+- apt install zabbix-server-pgsql zabbix-frontend-php php7.4-pgsql zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+- systemctl status zabbix-server
+- su - postgres -c 'psql --command "CREATE USER zabbix WITH PASSWORD '\'123456789\'';"'
+- su - postgres -c 'psql --command "CREATE DATABASE zabbix OWNER zabbix;"'
+- zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
+- nano /etc/zabbix/zabbix_server.conf
+- systemctl restart zabbix-server zabbix-agent apache2
+- systemctl enable zabbix-server zabbix-agent apache2
 
 </details> 
   
@@ -61,17 +61,17 @@ systemctl enable zabbix-server zabbix-agent apache2
 ![alt text](https://github.com/Sayward-k8/smon-hw-02/blob/main/image/2.3.png)
 
 **Список всех использованных команд:**
-wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_latest_6.0+debian11_all.deb
-dpkg -i zabbix-release_latest_6.0+debian11_all.deb
-apt update
-apt install zabbix-agent
-systemctl restart zabbix-agent
-systemctl enable zabbix-agent
-nano /etc/zabbix/zabbix_agentd.conf
-tail -f /var/log/zabbix/zabbix_agentd.log
-systemctl restart zabbix-agent.service
-systemctl status zabbix-agent.service
-tail -f /var/log/zabbix/zabbix_agentd.log
+- wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_latest_6.0+debian11_all.deb
+- dpkg -i zabbix-release_latest_6.0+debian11_all.deb
+- apt update
+- apt install zabbix-agent
+- systemctl restart zabbix-agent
+- systemctl enable zabbix-agent
+- nano /etc/zabbix/zabbix_agentd.conf
+- tail -f /var/log/zabbix/zabbix_agentd.log
+- systemctl restart zabbix-agent.service
+- systemctl status zabbix-agent.service
+- tail -f /var/log/zabbix/zabbix_agentd.log
 </details>
 
 ### Задание 3 со звёздочкой*
